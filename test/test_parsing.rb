@@ -180,19 +180,17 @@ class TestParsing < Test::Unit::TestCase
 
 		# rm_sd_rt
 
-		#time = parse_now("jan 5 13:00")
-		#assert_equal Time.local(2007, 1, 5, 13), time
+		time = parse_now("jan 5 13:00")
+		assert_equal Time.local(2007, 1, 5, 13), time
 
-		# due to limitations of the Time class, these don't work
-
-		time = parse_now("may 40")
+		time = parse_now("40 may")
 		assert_equal nil, time
 
-		time = parse_now("may 27 40")
+		time = parse_now("40 may 27")
 		assert_equal nil, time
 
 		time = parse_now("1800-08-20")
-		assert_equal nil, time
+    assert_equal Time.local(1800, 8, 20, 12), time
 	end
 
 	def test_parse_guess_r
@@ -283,7 +281,7 @@ class TestParsing < Test::Unit::TestCase
 		assert_equal Time.local(2006, 10, 24, 12), time
 
 		time = parse_now("this year", :context => :past)
-		assert_equal Time.local(2006, 4, 24, 13), time
+		assert_equal Time.local(2006, 4, 24, 12), time
 
 		# month
 
@@ -590,7 +588,7 @@ class TestParsing < Test::Unit::TestCase
 
 	def test_parse_guess_o_r_g_r
 		time = parse_now("3rd month next year")
-		assert_equal Time.local(2007, 3, 16, 13), time
+		assert_equal Time.local(2007, 3, 16, 12), time
 
 		time = parse_now("3rd thursday this september")
 		assert_equal Time.local(2006, 9, 21, 12), time
@@ -679,16 +677,16 @@ class TestParsing < Test::Unit::TestCase
 		assert_equal Time.local(2007, 6, 20), t.end
 
 		t = parse_now("this winter", :guess => false)
-		assert_equal Time.local(2006, 12, 22, 23), t.begin
+		assert_equal Time.local(2006, 12, 22), t.begin
 		assert_equal Time.local(2007, 3, 19), t.end
 
 		t = parse_now("last spring", :guess => false)
-		assert_equal Time.local(2006, 3, 20, 23), t.begin
+		assert_equal Time.local(2006, 3, 20), t.begin
 		assert_equal Time.local(2006, 6, 20), t.end
 
 		t = parse_now("last winter", :guess => false)
-		assert_equal Time.local(2005, 12, 22, 23), t.begin
-		assert_equal Time.local(2006, 3, 19, 23), t.end
+		assert_equal Time.local(2005, 12, 22), t.begin
+		assert_equal Time.local(2006, 3, 19), t.end
 
 		t = parse_now("next spring", :guess => false)
 		assert_equal Time.local(2007, 3, 20), t.begin
@@ -712,7 +710,7 @@ class TestParsing < Test::Unit::TestCase
 		assert_equal Time.local(2007, 11, 3, 12), t1
 
 		t1 = Chronic.parse('1st sunday in november', :now => Time.local(2007))
-		assert_equal Time.local(2007, 11, 4, 11), t1
+		assert_equal Time.local(2007, 11, 4, 12), t1
 
 		# Chronic.debug = true
 		#

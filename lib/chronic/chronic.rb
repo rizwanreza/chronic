@@ -75,7 +75,7 @@ module Chronic
 		end
 		
 		def date_string(text, specified_options = {})
-      # text = pre_normalize(text)
+      text = pre_normalize(text)
       date_tokens = tokenize(text).map { |token| token.word if token.tagged? }
       return date_tokens.join(' ').strip
 	  end
@@ -260,6 +260,10 @@ module Chronic
 		def to_s
 			"#{@word}(#{@tags.join(', ')})"
 		end
+
+    unless RUBY_VERSION =~ /1\.9\./
+      alias :cover? :include?
+    end
 	end
 
 	# A Span represents a range of time. Since this class extends

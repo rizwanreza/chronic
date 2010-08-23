@@ -74,21 +74,21 @@ class Chronic::RepeaterTime < Chronic::Repeater #:nodoc:
 			catch :done do
 				if pointer == :future
 					if @type.ambiguous?
-						[midnight + @type + offset_fix, midnight + half_day + @type + offset_fix, tomorrow_midnight + @type].each do |t|
+						[midnight + @type.time + offset_fix, midnight + half_day + @type.time + offset_fix, tomorrow_midnight + @type.time].each do |t|
 							(@current_time = t; throw :done) if t >= @now
 						end
 					else
-						[midnight + @type + offset_fix, tomorrow_midnight + @type].each do |t|
+						[midnight + @type.time + offset_fix, tomorrow_midnight + @type.time].each do |t|
 							(@current_time = t; throw :done) if t >= @now
 						end
 					end
 				else # pointer == :past
 					if @type.ambiguous?
-						[midnight + half_day + @type + offset_fix, midnight + @type + offset_fix, yesterday_midnight + @type + half_day].each do |t|
+						[midnight + half_day + @type.time + offset_fix, midnight + @type.time + offset_fix, yesterday_midnight + @type.time + half_day].each do |t|
 							(@current_time = t; throw :done) if t <= @now
 						end
 					else
-						[midnight + @type + offset_fix, yesterday_midnight + @type].each do |t|
+						[midnight + @type.time + offset_fix, yesterday_midnight + @type.time].each do |t|
 							(@current_time = t; throw :done) if t <= @now
 						end
 					end

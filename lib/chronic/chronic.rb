@@ -261,9 +261,9 @@ module Chronic
 			"#{@word}(#{@tags.join(', ')})"
 		end
 
-    unless RUBY_VERSION =~ /1\.9\./
-      alias :cover? :include?
-    end
+    #unless RUBY_VERSION =~ /1\.9\./
+    #  alias :cover? :include?
+    #end
 	end
 
 	# A Span represents a range of time. Since this class extends

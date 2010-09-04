@@ -1,4 +1,1 @@
-require 'rubygems'
-require 'spec'
-
-require File.dirname(__FILE__) + '/../lib/chronic'
+require "chronic"

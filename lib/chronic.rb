@@ -8,8 +8,6 @@
 #=============================================================================
 
 $:.unshift File.dirname(__FILE__)     # For use/testing when no gem is installed
-
-require 'core_ext/object'
 require 'core_ext/time'
 
 require 'chronic/chronic'
